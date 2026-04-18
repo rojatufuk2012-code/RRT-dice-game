@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Neon Dice Game</title>
+</head>
+
+<body style="background:black; color:#00ff88; font-family:Consolas; text-align:center;">
+
+<h1>🎲 NEON DICE</h1>
+
+<p id="result">Drück SPACE oder Button</p>
+
+<button onclick="roll()">🎲 Würfeln</button>
+
+<script>
+let player = 0;
+let cpu = 0;
+
+function roll() {
+  let d1 = Math.floor(Math.random() * 6) + 1;
+  let d2 = Math.floor(Math.random() * 6) + 1;
+
+  player += d1;
+  cpu += d2;
+
+  let text = "DU: " + d1 + " | CPU: " + d2 + "<br>";
+  text += "Score → DU: " + player + " | CPU: " + cpu;
+
+  if(player >= 20){
+    text += "<br>🏆 DU GEWINNST!";
+    player = 0; cpu = 0;
+  }
+
+  if(cpu >= 20){
+    text += "<br>😈 COMPUTER GEWINNT!";
+    player = 0; cpu = 0;
+  }
+
+  document.getElementById("result").innerHTML = text;
+}
+</script>
+
+</body>
+</html>
