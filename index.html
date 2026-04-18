@@ -1,45 +1,44 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Neon Dice Game</title>
-</head>
+function roll(){
 
-<body style="background:black; color:#00ff88; font-family:Consolas; text-align:center;">
+  let d1el = document.getElementById("d1");
+  let d2el = document.getElementById("d2");
 
-<h1>🎲 NEON DICE</h1>
+  d1el.classList.add("rolling");
+  d2el.classList.add("rolling");
 
-<p id="result">Drück SPACE oder Button</p>
+  setTimeout(()=>{
 
-<button onclick="roll()">🎲 Würfeln</button>
+    d1el.classList.remove("rolling");
+    d2el.classList.remove("rolling");
 
-<script>
-let player = 0;
-let cpu = 0;
+    let d1 = Math.floor(Math.random()*6)+1;
+    let d2 = Math.floor(Math.random()*6)+1;
 
-function roll() {
-  let d1 = Math.floor(Math.random() * 6) + 1;
-  let d2 = Math.floor(Math.random() * 6) + 1;
+    player += d1;
+    cpu += d2;
 
-  player += d1;
-  cpu += d2;
+    d1el.innerText = d1;
+    d2el.innerText = d2;
 
-  let text = "DU: " + d1 + " | CPU: " + d2 + "<br>";
-  text += "Score → DU: " + player + " | CPU: " + cpu;
+    let text = "DU: " + d1 + " | CPU: " + d2 + "<br>";
+    text += "Score → DU: " + player + " | CPU: " + cpu;
 
-  if(player >= 20){
-    text += "<br>🏆 DU GEWINNST!";
-    player = 0; cpu = 0;
-  }
+    let body = document.body;
 
-  if(cpu >= 20){
-    text += "<br>😈 COMPUTER GEWINNT!";
-    player = 0; cpu = 0;
-  }
+    if(player >= 20){
+      text += "<br>🏆 DU GEWINNST!";
+      body.classList.add("shake");
+      setTimeout(()=>body.classList.remove("shake"),300);
+      saveWin();
+      player = 0; cpu = 0;
+    }
 
-  document.getElementById("result").innerHTML = text;
+    if(cpu >= 20){
+      text += "<br>😈 COMPUTER GEWINNT!";
+      cpu = 0; player = 0;
+    }
+
+    document.getElementById("result").innerHTML = text;
+
+  },200);
 }
-</script>
-
-</body>
-</html>
