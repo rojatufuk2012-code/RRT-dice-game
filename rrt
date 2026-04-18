@@ -1,0 +1,10 @@
+.dice {
+  font-size:60px;
+  display:inline-block;
+  transition: transform 0.15s ease;
+}
+
+.rolling {
+  transform: rotate(720deg) scale(1.4);
+  filter: drop-shadow(0 0 10px #00ff88);
+}
